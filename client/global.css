@@ -1,0 +1,136 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 240 10% 6%;
+    --foreground: 220 15% 96%;
+
+    --card: 240 10% 8%;
+    --card-foreground: 220 15% 96%;
+
+    --popover: 240 10% 8%;
+    --popover-foreground: 220 15% 96%;
+
+    --primary: 260 100% 70%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 190 100% 70%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 240 8% 20%;
+    --muted-foreground: 220 10% 70%;
+
+    --accent: 260 100% 70%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 8% 20%;
+    --input: 240 8% 20%;
+    --ring: 260 100% 70%;
+
+    --radius: 0.75rem;
+
+    --brand: 260 100% 70%;
+    --brand-2: 190 100% 70%;
+
+    --sidebar-background: 240 10% 6%;
+    --sidebar-foreground: 220 15% 96%;
+
+    --sidebar-primary: 260 100% 70%;
+    --sidebar-primary-foreground: 0 0% 8%;
+
+    --sidebar-accent: 240 8% 16%;
+
+    --sidebar-accent-foreground: 220 15% 96%;
+
+    --sidebar-border: 240 8% 20%;
+
+    --sidebar-ring: 260 100% 70%;
+  }
+
+  .dark {
+    --background: 240 10% 6%;
+    --foreground: 220 15% 96%;
+
+    --card: 240 10% 8%;
+    --card-foreground: 220 15% 96%;
+
+    --popover: 240 10% 8%;
+    --popover-foreground: 220 15% 96%;
+
+    --primary: 260 100% 70%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 190 100% 70%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 240 8% 20%;
+    --muted-foreground: 220 10% 70%;
+
+    --accent: 260 100% 70%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 8% 20%;
+    --input: 240 8% 20%;
+    --ring: 260 100% 70%;
+    --sidebar-background: 240 10% 6%;
+    --sidebar-foreground: 220 15% 96%;
+    --sidebar-primary: 260 100% 70%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 240 8% 16%;
+    --sidebar-accent-foreground: 220 15% 96%;
+    --sidebar-border: 240 8% 20%;
+    --sidebar-ring: 260 100% 70%;
+
+    --brand: 260 100% 70%;
+    --brand-2: 190 100% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .nebula-bg {
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(1200px 600px at 50% -100px, hsl(var(--brand)/0.18), transparent 60%),
+      radial-gradient(800px 400px at 10% 20%, hsl(var(--brand-2)/0.15), transparent 60%),
+      radial-gradient(800px 400px at 90% 30%, hsl(var(--brand)/0.12), transparent 60%),
+      radial-gradient(600px 300px at 70% 80%, hsl(var(--brand-2)/0.12), transparent 60%);
+  }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal-in { opacity: 1 !important; transform: translateY(0) !important; }
+
+  .animate-gradient { background-size: 200% 200%; animation: gradient-x 8s ease infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .animate-gradient { animation: none; }
+}
