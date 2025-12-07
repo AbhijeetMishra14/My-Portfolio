@@ -72,11 +72,35 @@ export default function Index() {
   };
 
   const overrides: Record<string, { name?: string; image?: string; live?: string }> = {
-    arya: { name: "Jarvis", image: "https://www.nibib.nih.gov/sites/default/files/inline-images/AI%20600%20x%20400.jpg" },
-    nivaashub: { image: "https://cdn.builder.io/api/v1/image/assets%2F7c2c842d462c4980be025beefe58c5ff%2F079fa205f74f42039f067dc5107a97e5?format=webp&width=800" },
-    aafnoshop: { image: "https://cdn.builder.io/api/v1/image/assets%2F7c2c842d462c4980be025beefe58c5ff%2F688c303bbe9745c3b228e76bc796ea78?format=webp&width=800" },
-    "roshni-portfolio": { live: "https://roshnimishra.com.np/" },
-    roshni: { live: "https://roshnimishra.com.np/" },
+    arya: { 
+      name: "Jarvis", 
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvkUFmp5jSF-DhrD5102bzHU7RbidetfqYfA&s" 
+    },
+    nivaashub: { 
+      image: "nivaashub.png" 
+    },
+    medizo: { 
+      image: "https://s3.envato.com/files/493323996/01_medizo_Preview.__large_preview.jpg" 
+    },
+    aafnoshop: { 
+      image: "https://shipsy.io/wp-content/uploads/2021/06/Blog-91.jpg" 
+    },
+    "my-portfolio": { 
+      image: "https://s.wordpress.com/mshots/v1/abhijeetmishra.netlify.app?w=1200&h=675",
+      live: "https://abhijeetmishra.netlify.com"
+    },
+    portfolio: { 
+      image: "https://s.wordpress.com/mshots/v1/abhijeetmishra.netlify.app?w=1200&h=675",
+      live: "https://abhijeetmishra.netlify.com"
+    },
+    "roshni-portfolio": { 
+      image: "https://s.wordpress.com/mshots/v1/roshnimishra.com.np?w=1200&h=675",
+      live: "https://roshnimishra.com.np/" 
+    },
+    roshni: { 
+      image: "https://s.wordpress.com/mshots/v1/roshnimishra.com.np?w=1200&h=675",
+      live: "https://roshnimishra.com.np/" 
+    },
   };
   return (
     <div className="space-y-20">
@@ -268,13 +292,10 @@ export default function Index() {
               return (
                 <article key={repo.id} className="group relative overflow-hidden rounded-xl border border-white/10 bg-card/40 transition-transform duration-300 hover:-translate-y-1">
                   {(() => {
-                    const og = `https://opengraph.githubassets.com/1/${GH_USER}/${repo.name}`;
-                    const liveImg = live ? `https://s.wordpress.com/mshots/v1/${encodeURIComponent(live)}?w=1200` : undefined;
-                    const isPortfolio = /portfolio/i.test(repo.name);
-                    const localShot = typeof window !== "undefined" && isPortfolio ? `https://s.wordpress.com/mshots/v1/${encodeURIComponent(window.location.origin)}?w=1200` : undefined;
-                    const cover = localShot || liveImg || img || og;
+                    // Prioritize custom images, then fall back to live site screenshots or GitHub OG
+                    const cover = img || (live ? `https://s.wordpress.com/mshots/v1/${encodeURIComponent(live)}?w=1200` : undefined) || `https://opengraph.githubassets.com/1/${GH_USER}/${repo.name}`;
                     return (
-                      <img src={cover} alt={`${displayName} live preview`} className="aspect-video w-full object-cover" loading="lazy" />
+                      <img src={cover} alt={`${displayName} live preview`} className="aspect-video w-full object-cover" loading="lazy" onError={(e) => { e.currentTarget.src = `https://opengraph.githubassets.com/1/${GH_USER}/${repo.name}`; }} />
                     );
                   })()}
                   <div className="p-5">
