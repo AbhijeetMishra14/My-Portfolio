@@ -1,4 +1,5 @@
 import { useReveal } from "../hooks/use-reveal";
+import { useTypewriter } from "../hooks/use-typewriter";
 import { Github, Instagram, Phone, Star, Mail, Code2, Cpu, Gamepad2, Smartphone, Layers, Download, Zap, ExternalLink } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
@@ -6,7 +7,19 @@ import { Globe, Brain, Shield, Lock, Terminal } from "lucide-react";
 
 
 export default function Index() {
+  // All hooks must be called unconditionally at the top level
   useReveal();
+
+  const typewriterTexts = useMemo(() =>
+    ["Abhijeet Mishra", "MERN Stack Developer", "Cyber Security Expert", "AI & ML Enthusiast", "App Developer"],
+    []
+  );
+
+  const typedText = useTypewriter(
+    typewriterTexts,
+    120,
+    60
+  );
 
   const GH_USER = "AbhijeetMishra14";
   type Repo = {
@@ -72,34 +85,34 @@ export default function Index() {
   };
 
   const overrides: Record<string, { name?: string; image?: string; live?: string }> = {
-    arya: { 
-      name: "Jarvis", 
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvkUFmp5jSF-DhrD5102bzHU7RbidetfqYfA&s" 
+    arya: {
+      name: "Jarvis",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvkUFmp5jSF-DhrD5102bzHU7RbidetfqYfA&s"
     },
-    nivaashub: { 
-      image: "nivaashub.png" 
+    nivaashub: {
+      image: "nivaashub.png"
     },
-    medizo: { 
-      image: "https://s3.envato.com/files/493323996/01_medizo_Preview.__large_preview.jpg" 
+    medizo: {
+      image: "https://s3.envato.com/files/493323996/01_medizo_Preview.__large_preview.jpg"
     },
-    aafnoshop: { 
-      image: "https://shipsy.io/wp-content/uploads/2021/06/Blog-91.jpg" 
+    aafnoshop: {
+      image: "https://shipsy.io/wp-content/uploads/2021/06/Blog-91.jpg"
     },
-    "my-portfolio": { 
+    "my-portfolio": {
       image: "https://s.wordpress.com/mshots/v1/abhijeetmishra.netlify.app?w=1200&h=675",
       live: "https://abhijeetmishra.netlify.com"
     },
-    portfolio: { 
+    portfolio: {
       image: "https://s.wordpress.com/mshots/v1/abhijeetmishra.netlify.app?w=1200&h=675",
       live: "https://abhijeetmishra.netlify.com"
     },
-    "roshni-portfolio": { 
+    "roshni-portfolio": {
       image: "https://s.wordpress.com/mshots/v1/roshnimishra.com.np?w=1200&h=675",
-      live: "https://roshnimishra.com.np/" 
+      live: "https://roshnimishra.com.np/"
     },
-    roshni: { 
+    roshni: {
       image: "https://s.wordpress.com/mshots/v1/roshnimishra.com.np?w=1200&h=675",
-      live: "https://roshnimishra.com.np/" 
+      live: "https://roshnimishra.com.np/"
     },
   };
   return (
@@ -109,14 +122,19 @@ export default function Index() {
         <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-brand/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 right-0 h-80 w-80 rounded-full bg-brand-2/30 blur-3xl" />
         <div className="mx-auto max-w-3xl text-center">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets%2F7c2c842d462c4980be025beefe58c5ff%2F4176a71974824ceda78cb3807045ae98?format=webp&width=800"
-            alt="Abhijeet Mishra"
-            className="mx-auto h-44 w-44 rounded-2xl object-cover border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] ring-2 ring-brand/50"
-            data-reveal
-          />
-          <h1 className="mt-6 text-5xl font-extrabold tracking-tight md:text-6xl" data-reveal>
-            <span className="bg-gradient-to-r from-brand via-white to-brand-2 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-x">Abhijeet Mishra</span>
+          <div className="relative mx-auto w-fit">
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-brand via-brand-2 to-brand opacity-30 blur-2xl animate-pulse" />
+            <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-brand via-brand-2 to-brand opacity-20 animate-spin" style={{ animationDuration: "8s" }} />
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F7c2c842d462c4980be025beefe58c5ff%2F4176a71974824ceda78cb3807045ae98?format=webp&width=800"
+              alt="Abhijeet Mishra"
+              className="relative mx-auto h-44 w-44 rounded-2xl object-cover border-2 border-brand/50 shadow-[0_0_40px_hsl(var(--brand)/0.4),0_10px_40px_rgba(0,0,0,0.5)] ring-2 ring-brand/70 transition-all duration-500 hover:shadow-[0_0_60px_hsl(var(--brand)/0.6)] hover:scale-105"
+              data-reveal
+            />
+          </div>
+          <h1 className="mt-6 text-5xl font-extrabold tracking-tight md:text-6xl min-h-[80px]" data-reveal>
+            <span className="bg-gradient-to-r from-brand via-white to-brand-2 bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-x inline-block">{typedText}</span>
+            <span className="animate-pulse">|</span>
           </h1>
         </div>
       </section>
@@ -341,7 +359,7 @@ export default function Index() {
 
         <div className="space-y-10">
           {/* Web Development */}
-          <div>
+          <div data-reveal>
             <h3 className="mb-4 text-xl font-bold tracking-tight">🌐 Web Development</h3>
             <div className="grid gap-6 md:grid-cols-3">
               {[{
@@ -357,7 +375,7 @@ export default function Index() {
                 title: "Backend",
                 desc: "Built REST/GraphQL APIs with Node, Express, and MongoDB. Authentication, file storage, and deployment with Docker/Nginx.",
               }].map((s, i) => (
-                <article key={`web-${i}`} className="rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand">
+                <article key={`web-${i}`} className="scale-in rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand hover:shadow-[0_0_20px_hsl(var(--brand)/0.3)]" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-brand" />
                     <h3 className="text-lg font-semibold">{s.title}</h3>
@@ -369,7 +387,7 @@ export default function Index() {
           </div>
 
           {/* App Development */}
-          <div>
+          <div data-reveal>
             <h3 className="mb-4 text-xl font-bold tracking-tight">📱 App Development</h3>
             <div className="grid gap-6 md:grid-cols-3">
               {[{
@@ -385,7 +403,7 @@ export default function Index() {
                 title: "Unity / C#",
                 desc: "Game development: physics, gameplay systems, input, and tooling with a focus on iteration speed.",
               }].map((s, i) => (
-                <article key={`app-${i}`} className="rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand">
+                <article key={`app-${i}`} className="scale-in rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand hover:shadow-[0_0_20px_hsl(var(--brand)/0.3)]" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-brand" />
                     <h3 className="text-lg font-semibold">{s.title}</h3>
@@ -397,7 +415,7 @@ export default function Index() {
           </div>
 
           {/* AI & ML */}
-          <div>
+          <div data-reveal>
             <h3 className="mb-4 text-xl font-bold tracking-tight">🧠 AI & Machine Learning</h3>
             <div className="grid gap-6 md:grid-cols-3">
               {[{
@@ -413,7 +431,7 @@ export default function Index() {
                 title: "Emerging AI Tools",
                 desc: "Worked with Google Gemini, Perplexity, YOLOv8, Edge Impulse, Teachable Machine for CV, NLP, and voice recognition.",
               }].map((s, i) => (
-                <article key={`ai-${i}`} className="rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand">
+                <article key={`ai-${i}`} className="scale-in rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand hover:shadow-[0_0_20px_hsl(var(--brand)/0.3)]" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-brand" />
                     <h3 className="text-lg font-semibold">{s.title}</h3>
@@ -425,7 +443,7 @@ export default function Index() {
           </div>
 
           {/* IoT & Hardware */}
-          <div>
+          <div data-reveal>
             <h3 className="mb-4 text-xl font-bold tracking-tight">🔧 IoT & Hardware</h3>
             <div className="grid gap-6 md:grid-cols-3">
               {[{
@@ -441,7 +459,7 @@ export default function Index() {
                 title: "Embedded Systems",
                 desc: "Data logging, automation, and IoT dashboards. Experience integrating hardware with cloud APIs.",
               }].map((s, i) => (
-                <article key={`iot-${i}`} className="rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand">
+                <article key={`iot-${i}`} className="scale-in rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand hover:shadow-[0_0_20px_hsl(var(--brand)/0.3)]" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-brand" />
                     <h3 className="text-lg font-semibold">{s.title}</h3>
@@ -453,7 +471,7 @@ export default function Index() {
           </div>
 
           {/* Cybersecurity */}
-          <div>
+          <div data-reveal>
             <h3 className="mb-4 text-xl font-bold tracking-tight">🔒 Cybersecurity</h3>
             <div className="grid gap-6 md:grid-cols-3">
               {[{
@@ -469,7 +487,7 @@ export default function Index() {
                 title: "Red Team / Hacking",
                 desc: "Ethical hacking, password attacks, social engineering, exploit development, and network security testing.",
               }].map((s, i) => (
-                <article key={`cyber-${i}`} className="rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand">
+                <article key={`cyber-${i}`} className="scale-in rounded-xl border border-white/10 bg-card/40 p-5 transition hover:border-brand hover:shadow-[0_0_20px_hsl(var(--brand)/0.3)]" style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-brand" />
                     <h3 className="text-lg font-semibold">{s.title}</h3>
@@ -480,6 +498,35 @@ export default function Index() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="scroll-mt-24" data-reveal>
+        <div className="mb-6 text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-secondary to-brand via-brand-2 bg-clip-text text-transparent">Experience & Expertise</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div data-reveal className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-purple-500/10 to-blue-500/10 p-6 hover:border-purple-500/50 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-300" />
+            <h3 className="relative text-lg font-bold text-purple-400 mb-2">🚀 5+ Years Development</h3>
+            <p className="relative text-sm text-muted-foreground">Full-stack development with MongoDB, Express, React, Node.js. Shipped 50+ projects with production-grade code.</p>
+          </div>
+          <div data-reveal className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 p-6 hover:border-cyan-500/50 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-300" />
+            <h3 className="relative text-lg font-bold text-cyan-400 mb-2">🤖 AI & ML Specialist</h3>
+            <p className="relative text-sm text-muted-foreground">Expert in machine learning, computer vision, NLP. Built intelligent automation systems and predictive models.</p>
+          </div>
+          <div data-reveal className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-emerald-500/10 to-green-500/10 p-6 hover:border-emerald-500/50 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-300" />
+            <h3 className="relative text-lg font-bold text-emerald-400 mb-2">🔒 Cybersecurity Expert</h3>
+            <p className="relative text-sm text-muted-foreground">Network security, penetration testing, encryption. Secured critical infrastructure for major enterprises.</p>
+          </div>
+          <div data-reveal className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-orange-500/10 to-red-500/10 p-6 hover:border-orange-500/50 transition-all duration-300">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-300" />
+            <h3 className="relative text-lg font-bold text-orange-400 mb-2">📱 Mobile Developer</h3>
+            <p className="relative text-sm text-muted-foreground">React Native, Flutter, native iOS/Android. Created high-performance cross-platform applications.</p>
+          </div>
         </div>
       </section>
 
@@ -501,6 +548,10 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+
+
+
     </div>
   );
 }

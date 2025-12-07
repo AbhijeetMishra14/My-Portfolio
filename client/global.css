@@ -111,6 +111,11 @@
 
   body {
     @apply bg-background text-foreground;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="%234f46e5"/><circle cx="16" cy="16" r="10" fill="none" stroke="%234f46e5" stroke-width="1.5" opacity="0.5"/></svg>') 16 16, auto;
+  }
+
+  a, button {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="%2306b6d4"/><circle cx="16" cy="16" r="11" fill="none" stroke="%2306b6d4" stroke-width="1.5" opacity="0.6"/></svg>') 16 16, auto;
   }
 }
 
@@ -118,16 +123,299 @@
   .nebula-bg {
     background-color: hsl(var(--background));
     background-image:
-      radial-gradient(1200px 600px at 50% -100px, hsl(var(--brand)/0.18), transparent 60%),
-      radial-gradient(800px 400px at 10% 20%, hsl(var(--brand-2)/0.15), transparent 60%),
-      radial-gradient(800px 400px at 90% 30%, hsl(var(--brand)/0.12), transparent 60%),
-      radial-gradient(600px 300px at 70% 80%, hsl(var(--brand-2)/0.12), transparent 60%);
+      radial-gradient(1200px 600px at 50% -100px, hsl(var(--brand)/0.25), transparent 60%),
+      radial-gradient(800px 400px at 10% 20%, hsl(var(--brand-2)/0.22), transparent 60%),
+      radial-gradient(800px 400px at 90% 30%, hsl(var(--brand)/0.18), transparent 60%),
+      radial-gradient(600px 300px at 70% 80%, hsl(var(--brand-2)/0.15), transparent 60%);
   }
 
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal-in { opacity: 1 !important; transform: translateY(0) !important; }
+  .reveal { 
+    opacity: 0; 
+    transform: translateY(16px); 
+    transition: opacity .6s ease, transform .6s ease; 
+  }
+  
+  .reveal-in { 
+    opacity: 1 !important; 
+    transform: translateY(0) !important; 
+  }
 
-  .animate-gradient { background-size: 200% 200%; animation: gradient-x 8s ease infinite; }
+  /* Professional scroll reveal effect - inspired by sakshyambastakoti.com.np */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(50px);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal].reveal-in {
+    animation: elegantFadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* Smooth staggered delays for sequential items */
+  [data-reveal].reveal-in:nth-child(1) { animation-delay: 0.1s; }
+  [data-reveal].reveal-in:nth-child(2) { animation-delay: 0.2s; }
+  [data-reveal].reveal-in:nth-child(3) { animation-delay: 0.3s; }
+  [data-reveal].reveal-in:nth-child(4) { animation-delay: 0.4s; }
+  [data-reveal].reveal-in:nth-child(5) { animation-delay: 0.5s; }
+  [data-reveal].reveal-in:nth-child(6) { animation-delay: 0.6s; }
+  [data-reveal].reveal-in:nth-child(7) { animation-delay: 0.7s; }
+  [data-reveal].reveal-in:nth-child(8) { animation-delay: 0.8s; }
+  [data-reveal].reveal-in:nth-child(9) { animation-delay: 0.9s; }
+  [data-reveal].reveal-in:nth-child(10) { animation-delay: 1s; }
+
+  /* Circular skill animation */
+  .skill-orbit {
+    animation: orbit 20s linear infinite;
+    transform-origin: var(--orbit-center, 50% 50%);
+  }
+
+  .skill-orbit:nth-child(1) { animation-delay: 0s; }
+  .skill-orbit:nth-child(2) { animation-delay: -5s; }
+  .skill-orbit:nth-child(3) { animation-delay: -10s; }
+  .skill-orbit:nth-child(4) { animation-delay: -15s; }
+
+  .animate-gradient { 
+    background-size: 200% 200%; 
+    animation: gradient-x 8s ease infinite; 
+  }
+
+  /* Scale-in effect for cards - professional easing */
+  .scale-in {
+    animation: scaleIn 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Slide-in effect - professional */
+  .slide-in-left {
+    animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Glow effect on hover - professional transition */
+  .glow-on-scroll {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 0 1px rgba(var(--brand-rgb, 260), 0.1);
+  }
+
+  .glow-on-scroll:hover {
+    box-shadow: 0 0 30px rgba(var(--brand-rgb, 260), 0.3), 
+                0 0 60px rgba(var(--brand-rgb, 260), 0.15);
+    transform: translateY(-4px);
+  }
+
+  /* Image effects */
+  .image-pulse-ring {
+    animation: pulse-ring 2s infinite;
+  }
+
+  .image-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--brand) / 0.2),
+      transparent
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  /* Glow text effect */
+  .glow-text {
+    text-shadow: 0 0 10px hsl(var(--brand) / 0.5), 0 0 20px hsl(var(--brand) / 0.3);
+  }
+
+  /* Float up animation for particles */
+  .float-up {
+    animation: float-up 3s ease-out forwards;
+  }
+
+  /* Smooth transitions - professional easing */
+  .smooth-transition {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Professional hover lift effect */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Enhanced section reveal - professional and smooth */
+  section[data-reveal] {
+    opacity: 0;
+    transform: translateY(60px);
+    will-change: opacity, transform;
+  }
+
+  section[data-reveal].reveal-in {
+    animation: sectionSlideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+@keyframes elegantFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes butterflyWingsReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes butterflyWingsSectionReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealItem {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(80px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(80px) rotate(-360deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 hsl(var(--brand) / 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px hsl(var(--brand) / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsl(var(--brand) / 0);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

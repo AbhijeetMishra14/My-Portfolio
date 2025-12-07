@@ -24,39 +24,57 @@ export default function NebulaCanvas() {
     window.addEventListener("resize", resize);
 
     // Build stars
-    const count = Math.floor((window.innerWidth * window.innerHeight) / 9000);
+    const count = Math.floor((window.innerWidth * window.innerHeight) / 8000);
     const stars = Array.from({ length: count }).map(() => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.2 + 0.2,
+      r: Math.random() * 1.5 + 0.3,
       a: Math.random(),
-      v: Math.random() * 0.02 + 0.005,
+      v: Math.random() * 0.025 + 0.008,
     }));
+
+    const getColor = (cssVar: string, alpha = 1) => {
+      const style = getComputedStyle(document.documentElement);
+      const hsl = style.getPropertyValue(cssVar).trim();
+      if (!hsl) return `rgba(100, 100, 255, ${alpha})`;
+      
+      const parts = hsl.split(/\s+/);
+      let h = parts[0];
+      let s = parts[1] || "100%";
+      let l = parts[2] || "50%";
+      
+      // Ensure percentages
+      if (!s.includes("%")) s = s + "%";
+      if (!l.includes("%")) l = l + "%";
+      
+      return `hsla(${h}, ${s}, ${l}, ${alpha})`;
+    };
 
     const drawNebula = () => {
       const w = window.innerWidth, h = window.innerHeight;
-      // soft radial glows (brand + brand-2)
-      const g1 = ctx.createRadialGradient(w * 0.2, h * 0.2, 0, w * 0.2, h * 0.2, Math.max(w, h) * 0.6);
-      g1.addColorStop(0, getColor("--brand", 0.28));
+      
+      // Main nebula - brand color (purple)
+      const g1 = ctx.createRadialGradient(w * 0.2, h * 0.2, 0, w * 0.2, h * 0.2, Math.max(w, h) * 0.7);
+      g1.addColorStop(0, getColor("--brand", 0.45));
+      g1.addColorStop(0.6, getColor("--brand", 0.15));
       g1.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = g1;
       ctx.fillRect(0, 0, w, h);
 
-      const g2 = ctx.createRadialGradient(w * 0.85, h * 0.35, 0, w * 0.85, h * 0.35, Math.max(w, h) * 0.5);
-      g2.addColorStop(0, getColor("--brand-2", 0.22));
+      // Secondary nebula - cyan (brand-2)
+      const g2 = ctx.createRadialGradient(w * 0.85, h * 0.35, 0, w * 0.85, h * 0.35, Math.max(w, h) * 0.6);
+      g2.addColorStop(0, getColor("--brand-2", 0.38));
+      g2.addColorStop(0.6, getColor("--brand-2", 0.1));
       g2.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = g2;
       ctx.fillRect(0, 0, w, h);
-    };
-
-    const getColor = (cssVar: string, alpha = 1) => {
-      const style = getComputedStyle(document.documentElement);
-      const hsl = style.getPropertyValue(cssVar).trim(); // e.g. "260 100% 70%"
-      const [h, s, l] = hsl.split(/\s+/);
-      const hNum = parseFloat(h);
-      const sStr = s?.includes("%") ? s : `${s}%`;
-      const lStr = l?.includes("%") ? l : `${l}%`;
-      return `hsla(${isNaN(hNum) ? h : hNum}, ${sStr}, ${lStr}, ${alpha})`;
+      
+      // Additional accent nebula for depth
+      const g3 = ctx.createRadialGradient(w * 0.5, h * 0.8, 0, w * 0.5, h * 0.8, Math.max(w, h) * 0.5);
+      g3.addColorStop(0, "rgba(100, 200, 255, 0.2)");
+      g3.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = g3;
+      ctx.fillRect(0, 0, w, h);
     };
 
     const loop = () => {
@@ -65,7 +83,6 @@ export default function NebulaCanvas() {
 
       drawNebula();
 
-      // draw stars
       ctx.save();
       ctx.fillStyle = getColor("--foreground", 0.9);
       stars.forEach((s) => {
@@ -92,7 +109,7 @@ export default function NebulaCanvas() {
   return (
     <canvas
       ref={ref}
-      className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+      className="pointer-events-none absolute inset-0 -z-10 opacity-90"
       aria-hidden
     />
   );

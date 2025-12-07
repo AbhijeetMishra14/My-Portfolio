@@ -5,7 +5,7 @@ import NebulaCanvas from "../effects/NebulaCanvas";
 
 export default function Layout() {
   return (
-    <div className="min-h-screen nebula-bg">
+    <div className="min-h-screen bg-black">
       <SiteHeader />
       <main className="relative">
         <NebulaCanvas />
